@@ -1,0 +1,13 @@
+<h1>{{ pergunta.pergunta_texto }}</h1>
+
+{% if error_message %}<strong><h3 style="color:red;">{{ error_message }}</h3></strong>{% endif %}
+
+<form action="{% url 'voto' pergunta.id %}" method="post">
+{% csrf_token %}
+{% for opcao in pergunta.opcao_set.all %}
+    <input type="radio" name="opcao" id="opcao{{ forloop.counter }}" value="{{ opcao.id }}">
+    <label for="opcao{{ forloop.counter }}">{{ opcao.opcao_texto }}</label><br>
+{% endfor %}
+<br/>
+<input type="submit" value="Votar">
+</form>

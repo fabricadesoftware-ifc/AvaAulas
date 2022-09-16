@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <title>Cadastro - AvaAulas</title>
+</head>
+<body>
+    <main class="container">
+<h2>Cadastrar</h2>
+<form action = "{%url 'cadastro'%}" method = "POST"> {%csrf_token%} 
+    <div class="input-field">
+        <input type="text" placeholder="Seu nome" name="username">
+        <div class="underline"></div>
+    </div>
+    <div class="input-field">
+        <input type="email" placeholder="Seu Email" name="email">
+        <div class="underline"></div>
+    </div>
+    <div class="input-field">
+        <input type="password" placeholder="Sua senha" name="senha">
+    <div class="underline"></div>
+</div>
+    <input type="submit" value="cadastrar">
+    <p>Já tem um usuario? <a href="{%url 'login'%}">Logar!</a></p>
+    <br>
+</form>
+    </main>
+    
+   
+</body>
+</html>

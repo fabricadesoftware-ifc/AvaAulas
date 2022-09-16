@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/nav.css'%}">
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <title>Aulas - AvaAulas</title>
+    
+</head>
+<body> 
+    <header>
+        <nav>
+          <a class="textoNav2" href="index">A//V</a>
+          <a class="logo" href="/inicio">AvaAulas</a>
+          <div class="mobile-menu">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+          </div>
+          <ul class="nav-list">
+            <li><a class="textoNav" href="/">Início</a></li>
+            <li><a class="textoNav" href="/aulas/">Aulas</a></li>
+            <li><a class="textoNav" href="/resultados/">Resultados</a></li>
+            <li><a class="textoNav" href="/auth/sair">Logout</a></li>
+          </ul>
+        </nav>
+      </header>
+    <div class="centro">
+        <h1>Ultimas Aulas</h1>
+    </div>
+    <script src="{% static 'js/index.js'%}"></script>
+  
+</body>
+</html>

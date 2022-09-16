@@ -1,0 +1,10 @@
+body {
+    background-color: #3c4453;
+}
+.centro{
+    background-color:  rgb(146, 146, 146);
+    text-align: center;
+    margin: 200px;
+    width: auto;
+    height: auto;
+}
