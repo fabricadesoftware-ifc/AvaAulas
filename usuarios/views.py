@@ -1,8 +1,11 @@
+import http
+from itertools import count
+from telnetlib import STATUS
 from calendar import c
 import email
 from django.utils import timezone
 from http.client import HTTPResponse
-from django.shortcuts import render,  get_object_or_404
+from django.shortcuts import render,  get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, logout
@@ -13,39 +16,55 @@ from django.views.decorators.csrf import csrf_protect
 from django.urls import reverse
 from django.views import generic
 from .models import Pergunta, Opcao
+from .models import Usuario
+from hashlib import sha256
 
 def cadastro(request):
-    if request.method == "GET":
-      return render(request, 'cadastro.html')
-    else:
-        username = request.POST.get('username')
-        email= request.POST.get('email')
-        senha = request.POST.get('senha')
-
-        user = User.objects.filter(username=username).first()
-
-        if user:
-            return HttpResponse("Ja tem um nego com esse nome boy")
-
-        user = User.objects.create_user(username=username, email=email, password=senha)
-        user.save()
-
-        return render(request, 'login.html')
+    status = request.GET.get('status')
+    return render(request, 'cadastro.html', {'status': status})
 
 def login(request):
-     if request.method == "GET":
-         return render(request, 'login.html')
-     else:
-        username = request.POST.get('username')
-        senha = request.POST.get('senha')
+    status = request.GET.get('status')
+    return render(request, 'login.html', {'status': status})
+        
+def valida_cadastro(request):
+    nome = request.POST.get('username')
+    email = request.POST.get('email')
+    senha = request.POST.get('senha')
 
-        user = authenticate(username=username, password=senha)
+    usuario = Usuario.objects.filter(email = email)
 
-        if user:  
-            login_django(request, user)
-            return render(request, 'index.html')
-        else: 
-            return HttpResponse("email ou senha invalidos") 
+
+    if len(senha) < 6:
+        return redirect('/auth/cadastro/?status=2')
+    
+    if len(nome) < 3:
+        return redirect('/auth/cadastro/?status=1')
+
+    try:
+        senha = sha256(senha.encode()).hexdigest()
+        usuario = Usuario(nome = nome, email = email, senha = senha)
+        usuario.save()
+
+        return redirect('/auth/cadastro/?status=0')
+    except:
+        return HttpResponse("erro5")
+
+def valida_login(request):
+    email = request.POST.get('email')
+    senha = request.POST.get('senha')
+
+    senha = sha256(senha.encode()).hexdigest()
+
+    usuario = Usuario.objects.filter(email = email).filter(senha = senha)
+
+    if len(usuario) == 0:
+        return redirect('/login/?status=1')
+    elif len(usuario) > 0:
+        request.session['usuario'] = usuario[0].id
+        return redirect (f'/livro/home')
+
+    return redirect('/login/')
 
 def plataforma(request):
      return render(request, 'index.html')
@@ -53,7 +72,7 @@ def plataforma(request):
 
 def sair(request):
     logout(request)
-    return HttpResponseRedirect('/auth/login')
+    return HttpResponseRedirect('/login')
 
 
 
