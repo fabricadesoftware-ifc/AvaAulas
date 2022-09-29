@@ -125,3 +125,36 @@ form input[type="submit"]:hover {
     background: linear-gradient(to right, #5f6675, #537075);
 }
 
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: black;
+}
+
+.alert {
+    padding: 20px;
+    background-color: #f44336;
+    color: white;
+    width: 35%;
+    border-radius: 10px;
+    text-align: center;
+    margin: 15px auto;
+}
+.alertBom {
+    padding: 20px;
+    background-color: #3f9c00;
+    color: white;
+    width: 35%;
+    border-radius: 10px;
+    text-align: center;
+    margin: 15px auto;
+}
