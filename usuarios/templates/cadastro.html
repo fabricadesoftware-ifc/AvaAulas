@@ -9,6 +9,36 @@
     <title>Cadastro - AvaAulas</title>
 </head>
 <body>
+    {% if status == '1'%}
+    <div class="alert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        <strong>Erro!</strong> A senha deve ter pelo menos 6 caracteres.
+    </div>
+    {%endif%}
+    {% if status == '2'%}
+    <div class="alert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        <strong>Erro!</strong> o usuario deve ter pelo menos 3 caracteres.
+    </div>
+    {%endif%}
+    {% if status == '3'%}
+    <div class="alert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        <strong>Erro!</strong> Usuário já existe.
+    </div>
+    {%endif%}
+    {% if status == '4'%}
+    <div class="alert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        <strong>Erro!</strong> Nome ou senha invalidos.
+    </div>
+    {%endif%}
+    {% if status == '0'%}
+    <div class="alertBom">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        <strong>Sucesso!</strong> Cadastro realizado com sucesso.
+    </div>
+    {%endif%}
     <main class="container">
 <h2>Cadastrar</h2>
 <form action = "{%url 'cadastro'%}" method = "POST"> {%csrf_token%} 
