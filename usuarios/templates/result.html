@@ -28,7 +28,7 @@
           </ul>
         </nav>
       </header>
-      <h1>{{ pergunta.pergunta_texto }}</h1>
+      <h1>aaaa</h1>
 
       <ul>
       {% for opcao in pergunta.opcao_set.all %}
@@ -36,7 +36,7 @@
       {% endfor %}
       </ul>
       
-      <a href="{% url 'detalhe' pergunta.id %}">Votar Novamente?</a>
+      <a href="{% url 'index' %}">Votar Novamente?</a>
     <script src="{% static 'js/index.js'%}"></script>
   
 </body>
